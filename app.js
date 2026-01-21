@@ -32,7 +32,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
-
 //mongo atlas for online db
 const dbUrl=process.env.ATLASDB_URL
 main()
@@ -54,7 +53,7 @@ const store=MongoStore.create({
   },
   touchAfter:24*3600,
 })
-store.on("err",()=>{
+store.on("err",(err)=>{
   console.log("Error in the session",err);
   
 })
@@ -92,7 +91,9 @@ app.use((req,res,next)=>{
   res.locals.currentUser=req.user;
   next();
 })
-
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
 app.use("/listings", listingroutes);
 app.use("/listings/:id/reviews", reviewroutes);
 app.use("/",userroutes);
@@ -108,6 +109,8 @@ app.use((err, req, res, next) => {
   let { status = 500, message = "Something went wrong" } = err;
   res.status(status).render("./Error.ejs", { message });
 });
+
+
 app.listen(8080, () => {
   console.log("Connecting to port");
 });

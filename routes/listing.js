@@ -15,8 +15,6 @@ router.route("/")
 
 // to save
 .post(upload.single('listing[image]'),validationSchema, asyncWrap(listingController.save));
-
-
 //to create new route
 router.get("/new",isloggedin,listingController.new);
 
