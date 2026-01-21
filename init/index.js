@@ -24,4 +24,12 @@ const initDB=async ()=>{
     console.log("Data was initialised!!!!!");
     
 }
+const seedDB = async () => {
+  await Listing.deleteMany({});
+  await Listing.insertMany(initData.data);
+  console.log("Database seeded");
+};
+seedDB().then(() => {
+  mongoose.connection.close();
+});
 initDB();
