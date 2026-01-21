@@ -1,36 +1,36 @@
 <% layout("/layout/boilerplate.ejs") %>
 
 <body>
-    <div class="row mt-3">
-            <div class="col-4 offset-4">
-                <h3>Signup</h3>
-                <form method="post" action="/signup"  novalidate class="needs-validation">
+    <div class="row mt-3 justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-5 form-shell">
+            <h3>Signup</h3>
+            <form method="post" action="/signup"  novalidate class="needs-validation">
 
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username:</label>
-                        <input type="text" name="username" id="username" placeholder="Enter Username" class="form-control" required> 
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username:</label>
+                    <input type="text" name="username" id="username" placeholder="Enter Username" class="form-control" required> 
 
 
-                        <div class="valid-feedback">
-                            Sounds well.
-                        </div>
-
+                    <div class="valid-feedback">
+                        Sounds well.
                     </div>
 
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email:</label>
-                        <input type="email" name="email" id="email" placeholder="Enter Email" class="form-control" required> 
+                </div>
 
-                    </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" name="email" id="email" placeholder="Enter Email" class="form-control" required> 
 
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password:</label>
-                        <input type="password" name="password" id="password" placeholder="Enter Password" class="form-control" required> 
+                </div>
 
-                    </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="password" name="password" id="password" placeholder="Enter Password" class="form-control" required> 
 
-                    <button class="btn btn-success">Signup</button>
-                </form>
+                </div>
+
+                <button class="btn btn-success">Signup</button>
+            </form>
         </div>
     </div>
 </body>
