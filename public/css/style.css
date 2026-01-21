@@ -1,0 +1,142 @@
+/* new page */
+body{
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container{
+    flex:1;
+}
+.add-btn{
+    background: #fe424d !important;
+    border: none !important;
+}
+ /* edit  */
+.edit-btn{
+    background: #fe424d !important;
+    border: none !important;
+}
+
+/* navbar */
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+.fa-compass{
+    color: #fe424d;
+    font-size: 2rem;
+}
+.nav-link{
+    color: #111111 !important;
+}
+
+
+
+/* footer */
+
+.class-info-links a{
+    text-decoration: none;
+    color: #111111;
+}
+.class-info-links a:hover{
+    text-decoration: underline;
+    text-decoration-color: #222222;
+}
+.class-info-social-media{
+    width: 100%;
+}
+.class-info-social-media i{
+    color: #242222;
+}
+
+.class-info-links{
+    width: 100%;
+}
+
+.class-info{
+    background-color: #ebebeb;
+    height: 8rem;
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
+    text-align: center;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.class-info-social-media i{
+    font-size: 1.3rem;
+    margin-top: 1rem;
+}
+
+
+
+/* for cards */
+
+.listing-card{
+    border: none !important;
+    margin-bottom: 1rem !important;
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+.card-body{
+    padding: 0 !important;
+}
+.listing-link{
+    text-decoration: none;
+}
+
+
+/* card effect */
+
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+
+/* Show Page */
+.show-image{
+    height: 30vh;
+    width: 30vh;
+}
+
+.btns{
+    display: flex;
+}
+.show-card{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.mb-3 img{
+    border-radius: 8%;
+}
+
+  #map {
+    width: 100%;
+    height: 500px;   /* REQUIRED */
+  }
+
+.preiousImage
+{
+    height: 200px;
+    width: 400px;
+    border-radius: 5% !important;
+}
+.no-results{
+    text-align: center !important;
+    justify-content: center;
+    align-items: center;
+    color: #b32233;
+    background-color: rgb(214, 200, 77);
+    border-radius: 10px;
+    box-shadow:2px 3px 4px 3px rgb(204, 192, 192);
+}

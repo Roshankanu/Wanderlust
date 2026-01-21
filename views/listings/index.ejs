@@ -1,0 +1,175 @@
+<% layout("/layout/boilerplate.ejs") %>
+<style>
+    .filters{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    #filter{
+        text-align: center;
+        margin-right: 1.5rem;
+        opacity: 0.7;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    #filter:hover{
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    #filter.active{
+        opacity: 1;
+        color: #fe424d;
+        transform: scale(1.15);
+    }
+    #filter p{
+        font-size: 0.8rem;
+    }
+    .tax-info{
+        display: none;
+    }
+    .switch-toggle{
+        border: 1px solid rgb(224, 204, 204);
+        border-radius: 1rem;
+        height: 2.5rem;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        margin-left: 2rem;
+        opacity: 0.7;
+    }
+    .switch-toggle:hover{
+        opacity: 1;
+        border-color: black;
+    }
+</style>
+<body>
+    <% if(typeof selectedCategory !== 'undefined' && selectedCategory) { %>
+    <div class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+        <strong>Filtered by:</strong> <%= selectedCategory %> 
+        <a href="/listings" class="btn btn-sm btn-outline-dark ms-2">Clear Filter</a>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <% } %>
+    
+    <% if(typeof searchQuery !== 'undefined' && searchQuery) { %>
+    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+        <strong>Search results for:</strong> "<%= searchQuery %>" 
+        <a href="/listings" class="btn btn-sm btn-outline-dark ms-2">Clear Search</a>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <% } %>
+    
+    <div class="filters mt-3">
+        <div id="filter" data-category="Trending" class="<%= (typeof selectedCategory !== 'undefined' && selectedCategory === 'Trending') ? 'active' : '' %>">
+            <i class="fa-solid fa-fire"></i>
+            <p>Trending</p>
+        </div>
+        <div id="filter" data-category="Rooms" class="<%= (typeof selectedCategory !== 'undefined' && selectedCategory === 'Rooms') ? 'active' : '' %>">
+            <i class="fa-solid fa-bed"></i>
+            <p>Rooms</p>
+        </div>
+        <div id="filter" data-category="Iconic Cities" class="<%= (typeof selectedCategory !== 'undefined' && selectedCategory === 'Iconic Cities') ? 'active' : '' %>">
+            <i class="fa-solid fa-mountain-city"></i>
+            <p>Iconic Cities</p>
+        </div>
+        <div id="filter" data-category="Mountain" class="<%= (typeof selectedCategory !== 'undefined' && selectedCategory === 'Mountain') ? 'active' : '' %>">
+            <i class="fa-solid fa-mountain"></i>
+            <p>Mountain</p>
+        </div>
+        <div id="filter" data-category="Castles" class="<%= (typeof selectedCategory !== 'undefined' && selectedCategory === 'Castles') ? 'active' : '' %>">
+            <i class="fa-brands fa-fort-awesome"></i>
+            <p>Castles</p>
+        </div>
+        <div id="filter" data-category="Swimming" class="<%= (typeof selectedCategory !== 'undefined' && selectedCategory === 'Swimming') ? 'active' : '' %>">
+            <i class="fa-solid fa-person-swimming"></i>
+            <p>Swimming</p>
+        </div>
+        <div id="filter" data-category="farm" class="<%= (typeof selectedCategory !== 'undefined' && selectedCategory === 'farm') ? 'active' : '' %>">
+            <i class="fa-solid fa-tractor"></i>
+            <p>farm</p>
+        </div>
+        <div id="filter" data-category="Camping" class="<%= (typeof selectedCategory !== 'undefined' && selectedCategory === 'Camping') ? 'active' : '' %>">
+            <i class="fa-solid fa-campground"></i>
+            <p>Camping</p>
+        </div>
+        <div id="filter" data-category="Arctic" class="<%= (typeof selectedCategory !== 'undefined' && selectedCategory === 'Arctic') ? 'active' : '' %>">
+            <i class="fa-solid fa-snowman"></i>
+            <p>Arctic</p>
+        </div>
+        <div id="filter" data-category="Dome" class="<%= (typeof selectedCategory !== 'undefined' && selectedCategory === 'Dome') ? 'active' : '' %>">
+            <i class="fa-solid fa-igloo"></i>
+            <p>Dome</p>
+        </div>
+        <div id="filter" data-category="Boat" class="<%= (typeof selectedCategory !== 'undefined' && selectedCategory === 'Boat') ? 'active' : '' %>">
+            <i class="fa-solid fa-ship"></i>
+            <p>Boat</p>
+        </div>
+        <div class="switch-toggle">
+            <div class="form-check-reverse form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+                <label class="form-check-label" for="switchCheckDefault">Total amount after tax.</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1"> <!-- for adding into rows -->
+            <% if(alllisting.length === 0) { %>
+                <div class="col-12 text-center mt-5 no-results offset-4">
+                    <h4 class="mt-3">No listings found</h4>
+                    <p class="text-muted">Try adjusting your search or filter criteria</p>
+                    <a href="/listings" class="btn btn-primary mt-3 mb-3">View All Listings</a>
+                </div>
+            <% } else { %>
+            <% for(let listing of alllisting){ %>
+
+                <a href="/listings/<%=listing._id%>" class="listing-link">
+                    <div class="card listing-card">
+                        <img src="<%= listing.image.url %>" class="card-img-top" alt="Listing_image" style="height: 20rem;">
+                        <div class="card-img-overlay"></div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                <b> <%= listing.title %> </b><br>
+                        &#8377; <%= listing.price.toLocaleString("en-IN")%>/night
+                        &nbsp;&nbsp; <b class="tax-info">+18% GST</b>
+                        <br>
+                        <span class="badge bg-light text-dark mt-2"><%= listing.category %></span>
+                                </p>
+                            </div>
+                   </div>
+                </a>
+            
+    <% } %>
+    <% } %>
+
+    </div>
+</body>
+
+
+<script>
+    let switchTaxes=document.getElementById("switchCheckDefault");
+    switchTaxes.addEventListener("click",()=>{
+        let taxinfo=document.getElementsByClassName("tax-info");
+        for(info of taxinfo)
+        {
+            if(info.style.display!="inline")
+            {
+                info.style.display="inline";
+            }
+            else
+            {
+                info.style.display="none";
+            }
+        }
+        
+    })
+
+    // Filter functionality
+    let filterButtons = document.querySelectorAll("#filter[data-category]");
+    filterButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const category = button.getAttribute("data-category");
+            window.location.href = `/listings/filter/category?category=${encodeURIComponent(category)}`;
+        });
+        button.style.cursor = "pointer";
+    });
+</script>

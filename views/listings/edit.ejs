@@ -1,0 +1,152 @@
+<% layout("/layout/boilerplate.ejs") %>
+<script>
+    const mapToken="<%=process.env.MAP_API_TOKEN%>"
+    const coordinates=<%- JSON.stringify(listing.geometry.coordinates) %>
+    const locationName="<%= listing.location %>"
+</script>
+
+    <body>
+        <h3 class="mb-3 mt-3">Edit the list:</h3>
+        <form method="post" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-8 offset-2">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title:</label>
+                        <input type="text" name="listing[title]" value="<%= listing.title %>" class="form-control" required>
+
+                        <div class="valid-feedback">
+                            Title sounds best.
+                        </div>
+                        <div class="invalid-feedback">
+                            Title should be Valid.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description:</label>
+                        <textarea name="listing[description]" class="form-control" required><%= listing.description %></textarea>
+
+                        <div class="invalid-feedback">
+                            Description should be Valid.
+                        </div>
+                        <div class="valid-feedback">
+                            Description is valid.
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <h5>Original Image Preview</h5>
+                        <img class="preiousImage" src="<%=originalImageUrl%>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Upload new image:</label>
+                        <input type="file" name="listing[image]" value="<%= listing.image.url %>" class="form-control">
+
+                        <div class="invalid-feedback">
+                            Image should be Valid.
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="mb-3 col-md-4">
+                            <label for="price" class="form-label">Price:</label>
+                            <input type="number" name="listing[price]" value="<%= listing.price %>" min="0" class="form-control" required>
+                            
+                            <div class="invalid-feedback">
+                            Price should be Valid.
+                           </div>
+
+                            <div class="valid-feedback">
+                            Your entered Price is valid.
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-8">
+                            <label for="country" class="form-label">Country:</label>
+                            <select name="listing[country]" class="form-control" required>
+                                <option value="" disabled>Select a country</option>
+                                <option value="IN" <%= listing.country === 'IN' ? 'selected' : '' %>>India</option>
+                                <option value="NP" <%= listing.country === 'NP' ? 'selected' : '' %>>Nepal</option>
+                                <option value="US" <%= listing.country === 'US' ? 'selected' : '' %>>United States</option>
+                                <option value="GB" <%= listing.country === 'GB' ? 'selected' : '' %>>United Kingdom</option>
+                                <option value="CA" <%= listing.country === 'CA' ? 'selected' : '' %>>Canada</option>
+                                <option value="AU" <%= listing.country === 'AU' ? 'selected' : '' %>>Australia</option>
+                                <option value="CN" <%= listing.country === 'CN' ? 'selected' : '' %>>China</option>
+                                <option value="JP" <%= listing.country === 'JP' ? 'selected' : '' %>>Japan</option>
+                                <option value="FR" <%= listing.country === 'FR' ? 'selected' : '' %>>France</option>
+                                <option value="DE" <%= listing.country === 'DE' ? 'selected' : '' %>>Germany</option>
+                                <option value="IT" <%= listing.country === 'IT' ? 'selected' : '' %>>Italy</option>
+                                <option value="ES" <%= listing.country === 'ES' ? 'selected' : '' %>>Spain</option>
+                                <option value="BR" <%= listing.country === 'BR' ? 'selected' : '' %>>Brazil</option>
+                                <option value="MX" <%= listing.country === 'MX' ? 'selected' : '' %>>Mexico</option>
+                                <option value="RU" <%= listing.country === 'RU' ? 'selected' : '' %>>Russia</option>
+                                <option value="ZA" <%= listing.country === 'ZA' ? 'selected' : '' %>>South Africa</option>
+                                <option value="AE" <%= listing.country === 'AE' ? 'selected' : '' %>>United Arab Emirates</option>
+                                <option value="SG" <%= listing.country === 'SG' ? 'selected' : '' %>>Singapore</option>
+                                <option value="TH" <%= listing.country === 'TH' ? 'selected' : '' %>>Thailand</option>
+                                <option value="MY" <%= listing.country === 'MY' ? 'selected' : '' %>>Malaysia</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                    Country should be Valid.
+                            </div>
+                            <div class="valid-feedback">
+                                Your entered country is valid.
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location:</label>
+                        <input type="text" name="listing[location]" value="<%= listing.location %>"
+                            class="form-control" required>
+
+                        <div class="invalid-feedback">
+                            Location should be Valid.
+                        </div>
+                        <div class="valid-feedback">
+                                Your entered location is valid.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category:</label>
+                        <select name="listing[category]" class="form-control" required>
+                            <option value="" disabled>Select a category</option>
+                            <option value="Trending" <%= listing.category === 'Trending' ? 'selected' : '' %>>Trending</option>
+                            <option value="Rooms" <%= listing.category === 'Rooms' ? 'selected' : '' %>>Rooms</option>
+                            <option value="Iconic Cities" <%= listing.category === 'Iconic Cities' ? 'selected' : '' %>>Iconic Cities</option>
+                            <option value="Mountain" <%= listing.category === 'Mountain' ? 'selected' : '' %>>Mountain</option>
+                            <option value="Castles" <%= listing.category === 'Castles' ? 'selected' : '' %>>Castles</option>
+                            <option value="Swimming" <%= listing.category === 'Swimming' ? 'selected' : '' %>>Swimming</option>
+                            <option value="farm" <%= listing.category === 'farm' ? 'selected' : '' %>>farm</option>
+                            <option value="Camping" <%= listing.category === 'Camping' ? 'selected' : '' %>>Camping</option>
+                            <option value="Arctic" <%= listing.category === 'Arctic' ? 'selected' : '' %>>Arctic</option>
+                            <option value="Dome" <%= listing.category === 'Dome' ? 'selected' : '' %>>Dome</option>
+                            <option value="Boat" <%= listing.category === 'Boat' ? 'selected' : '' %>>Boat</option>
+                        </select>
+
+                        <div class="invalid-feedback">
+                            Category should be Valid.
+                        </div>
+                        <div class="valid-feedback">
+                            Your selected category is valid.
+                        </div>
+                    </div>
+
+                    <button class="mb-3 btn btn-dark edit-btn">Submit</button>
+        </form>
+        </div>
+        </div>
+        <div class="col-8 offset-2 mb-3">
+            <h3>Location Map</h3>
+          <div id="map" style="height: 400px;"></div>
+
+        </div>
+        <script src="/js/map.js"></script>
+    </body>
